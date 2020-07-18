@@ -14,7 +14,7 @@ namespace HotelReservation
             Console.Write("Check-out date (dd/MM/yyyy): ");
             DateTime checkOut = DateTime.Parse(Console.ReadLine());
 
-            //Forma ruim de teste
+            //Forma MUITO RUIM de teste
             //Usando if-else, os testes são feitos repetidos no código continuamente.
             //A lógica da reseva deveria estar dentro de um bloco só.
             if (checkOut <= checkIn)
@@ -35,6 +35,8 @@ namespace HotelReservation
 
                 reservation = new Reservation(number, checkIn, checkOut);
 
+                /*
+                 * Enviei o teste abaixo para a classe RESERVATION
                 //Pego o instante atual
                 DateTime now = DateTime.Now;
                 if(checkIn < now || checkOut < now)
@@ -44,10 +46,21 @@ namespace HotelReservation
                 else if (checkOut <= checkIn)
                 {
                     Console.WriteLine("Reservation error: Check-out date must be after check-in date.");
+                }*/
+                /***************************************************/
+                //Este método é RUIM
+                //Pois, o retorno do string não tem sentido no momento de atualizar a reserva
+                //A reserva deveria ser uma operação VOID
+                //Se precisasse retornar um string, teríamos um conflito de retorno.
+                string error = reservation.UpdateDates(checkIn, checkOut);
+
+                if (error != null)
+                {
+                    Console.WriteLine("Error in reservation: " + error);
                 }
                 else
                 {
-                    reservation.UpdateDates(checkIn, checkOut);
+                    //reservation.UpdateDates(checkIn, checkOut);
                     Console.WriteLine("Reservation: " + reservation);
                 }
 

@@ -34,10 +34,25 @@ namespace HotelReservation.Entities
         }
 
         //Atualizo as datas das reservas
-        public void UpdateDates(DateTime checkIn, DateTime checkOut)
+        //public void UpdateDates(DateTime checkIn, DateTime checkOut)
+        public string UpdateDates(DateTime checkIn, DateTime checkOut)
         {
+            //Pego o instante atual
+            DateTime now = DateTime.Now;
+
+            //Testo as atualizações de datas e se der exceção, retorno mensagem de erro.
+            if (checkIn < now || checkOut < now)
+            {
+                return "Reservation error: Reservation dates for update must be future dates.";
+            }
+            if (checkOut <= checkIn)
+            {
+                return "Reservation error: Check-out date must be after check-in date.";
+            }
+
             CheckIn = checkIn;
             CheckOut = checkOut;
+            return null; //o return null diz que não houve erro.
         }
 
 
